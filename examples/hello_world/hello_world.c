@@ -1,4 +1,5 @@
 #include "cmsis_os.h"
+#include "main.h"
 
 #define TASK1_STK_SIZE          512
 void task1(void *arg);
@@ -12,7 +13,8 @@ void task1(void *arg)
 {
     int count = 1;
     while (1) {
-        printf("###This is task1, %d\r\n", count++);
+      HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);  //TODO: added, turn LD2 off or on
+			printf("###This is task1, %d\r\n", count++);
         osDelay(2000);
     }
 }

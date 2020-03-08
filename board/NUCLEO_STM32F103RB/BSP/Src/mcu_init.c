@@ -3,15 +3,15 @@
 int fputc(int ch, FILE *f)
 {
   if (ch == '\n') {
-    HAL_UART_Transmit(&huart2, (void *)"\r", 1,30000);
+    HAL_UART_Transmit(&huart_0, (void *)"\r", 1,30000);
   }
-  HAL_UART_Transmit(&huart2, (uint8_t *)&ch, 1, 0xFFFF);
+  HAL_UART_Transmit(&huart_0, (uint8_t *)&ch, 1, 0xFFFF);
   return ch;
 }
 
 int _write(int fd, char *ptr, int len)
 {
-    (void)HAL_UART_Transmit(&huart2, (uint8_t *)ptr, len, 0xFFFF);
+    (void)HAL_UART_Transmit(&huart_0, (uint8_t *)ptr, len, 0xFFFF);
     return len;
 }
 
@@ -20,7 +20,7 @@ int fgetc(FILE *f)
   /* Place your implementation of fgetc here */
   /* e.g. readwrite a character to the USART2 and Loop until the end of transmission */
   uint8_t ch = 0;
-  HAL_UART_Receive(&huart2, &ch, 1,30000);
+  HAL_UART_Receive(&huart_0, &ch, 1,30000);
   return ch;
 }
 
